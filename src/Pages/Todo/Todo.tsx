@@ -35,8 +35,8 @@ export class Todo extends React.Component {
         return (
             <div>
                 {toDoStore.Tasks.map(task =>
-                    <div className={styles.Task}>
-                        <Accordion styled className={styles.Task}>
+                    <div className={styles.container}>
+                        <Accordion styled className={styles.toDo}>
                             <TaskView onClick={(task) => toDoStore.ChangeOpen(task)} task={task} />
                         </Accordion>
                     </div>

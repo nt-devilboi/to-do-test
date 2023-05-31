@@ -21,7 +21,16 @@ export class FakeApi {
                                 title: "Деревья",
                                 description: "сложное ааа",
                                 isOpen: false,
-                                subtasks: []
+                                subtasks: [],
+
+                            },
+                            {
+                                id: 5,
+                                title: "бин поиск",
+                                description: "ого можно решать квд",
+                                isOpen: false,
+                                subtasks: [],
+
                             }
                         ]
                     }
