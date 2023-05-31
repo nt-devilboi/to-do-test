@@ -1,24 +1,48 @@
 import React from "react";
-
+import {TaskView} from "../../component/Task/TaskView";
+import {inject, observer} from "mobx-react";
+import {TodoStore} from "./TodoStore";
+import {Accordion} from "semantic-ui-react";
+import styles from "./Todo.module.scss"
 export interface Task {
+    id: number
     title: string;
     description: string;
-    isComplete: boolean;
-    subtasks: subtask[];
+    isOpen: boolean;
+    subtasks: Task[];
+    }
+
+
+type InjPros = {
+    toDoStore: TodoStore;
 }
 
-export interface subtask {
-    title: string;
-    isComplete: boolean;
-}
-
+@inject("toDoStore")
+@observer
 export class Todo extends React.Component {
 
+    componentDidMount() {
+        this.injected.toDoStore.GetTask();
+    }
+
+    get injected(): InjPros {
+        return this.props as InjPros;
+    }
+
     render() {
+        const {toDoStore} = this.injected;
+
         return (
             <div>
-
+                {toDoStore.Tasks.map(task =>
+                    <div className={styles.Task}>
+                        <Accordion styled className={styles.Task}>
+                            <TaskView onClick={(task) => toDoStore.ChangeOpen(task)} task={task} />
+                        </Accordion>
+                    </div>
+                    )}
             </div>
+
         );
     }
 }
