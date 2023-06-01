@@ -2,10 +2,15 @@
   display: flex;
   justify-content: flex-start;
   padding: 0;
+  transition: background-color 0.3s ease;
 
   .checkBox {
     position: absolute;
     left: 65%;
+
+  }
+  .checkBox:hover {
+
   }
 
   .swither {
@@ -20,4 +25,8 @@
     height: 18px;
     padding: 0;
   }
+}
+
+.toDo:active {
+  background-color: greenyellow;
 }
