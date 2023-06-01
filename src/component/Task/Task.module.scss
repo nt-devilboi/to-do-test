@@ -1,0 +1,23 @@
+.toDo {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+
+  .checkBox {
+    position: absolute;
+    left: 65%;
+  }
+
+  .swither {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+  }
+
+  .title {
+    height: 18px;
+    padding: 0;
+  }
+}
