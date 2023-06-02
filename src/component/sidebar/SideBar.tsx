@@ -11,6 +11,7 @@ type props = {
     onChangeTitle: (newTitle: string) => void;
     onChangeDesc: (newDesc: string) => void;
     onClickCheckBox: () => void;
+    onClickTrash: () => void;
 }
 @observer
 export class SideBar extends React.Component<PropsWithChildren<props>> {
@@ -66,7 +67,7 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
                                 </div>
                             </Segment>
 
-                            <button className={styles.trash}>
+                            <button className={styles.trash} onClick={() => this.props.onClickTrash()}>
                                 <Icon size={"big"} color={"red"} name={"trash"}/>
                             </button>
                         </Sidebar>
