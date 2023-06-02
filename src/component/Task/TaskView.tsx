@@ -19,7 +19,7 @@ export class TaskView extends React.Component<{
     render() {
         const {task, onClickDropDown, onClickTask, onClickCheckBox} = this.props;
         return (
-            <div>
+            <div style={{color: "green"}}>
                 <Accordion.Title className={styles.toDo}
                                  active={task.isOpen}
                                  index={task.id}
@@ -27,8 +27,9 @@ export class TaskView extends React.Component<{
                 >
                     <button className={styles.switcher} onClick={() => onClickDropDown(task)}>
                         <Icon name='dropdown'/>
-                        {task.title}
+
                     </button>
+                    {task.title}
                     <div>
                         <Checkbox className={styles.checkBox} checked={task.isComplete}
                                   onClick={(e) => {

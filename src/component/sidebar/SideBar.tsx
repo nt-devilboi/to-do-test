@@ -28,7 +28,7 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
 
         return (
             <div >
-            <Grid columns={1}>
+            <Grid columns={1} >
                 <Grid.Column>
                     <Sidebar.Pushable as={Segment}>
                         <Sidebar
@@ -67,13 +67,17 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
                                 </div>
                             </Segment>
 
+                            <Segment>
+
+
+                            </Segment>
                             <button className={styles.trash} onClick={() => this.props.onClickTrash()}>
                                 <Icon size={"big"} color={"red"} name={"trash"}/>
                             </button>
                         </Sidebar>
 
                         <Sidebar.Pusher >
-                            <Segment basic color={"purple"} >
+                            <Segment size={"big"}  basic color={"purple"} >
                                 <div style={{height: "100vh"}}>
                                     <Header as='h3'>Todo</Header>
                                     {this.props.children}

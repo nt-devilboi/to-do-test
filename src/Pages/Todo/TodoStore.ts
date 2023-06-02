@@ -55,6 +55,7 @@ export class TodoStore {
 
     @action
     removeTask(task: Task) {
+
         const index = this.Tasks.indexOf(task, 0);
         if (index > -1) {
             this.Tasks.splice(index, 1);
@@ -72,3 +73,4 @@ export class TodoStore {
         task.isOpen = !task.isOpen;
     }
 }
+// todo реализовать счётчик выполенных задач сomputedte
