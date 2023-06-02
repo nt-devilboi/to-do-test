@@ -66,7 +66,11 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
                                 </div>
                             </Segment>
 
+                            <button className={styles.trash}>
+                                <Icon size={"big"} color={"red"} name={"trash"}/>
+                            </button>
                         </Sidebar>
+
                         <Sidebar.Pusher >
                             <Segment basic color={"purple"} >
                                 <div style={{height: "100vh"}}>
