@@ -24,7 +24,7 @@ type InjPros = {
 export class Todo extends React.Component {
 
     componentDidMount() {
-        this.injected.toDoStore.GetTask();
+        this.injected.toDoStore.getTask();
     }
 
     get injected(): InjPros {
@@ -35,13 +35,17 @@ export class Todo extends React.Component {
         const {toDoStore} = this.injected;
 
         return (
-            <SideBar task={toDoStore.SelectedTask}>
+            <SideBar task={toDoStore.SelectedTask}
+                     onClose={() => toDoStore.removeSelectedTask()}
+                     onChangeTitle={(newTitle: string) => toDoStore.changeTitle(newTitle, toDoStore.SelectedTask!)}
+                     onChangeDesc={(newDesc: string) => toDoStore.changeDesc(newDesc, toDoStore.SelectedTask!)}
+            onClickCheckBox={() => toDoStore}>
             <div>
                 {toDoStore.Tasks.map(task =>
                     <div className={styles.container} >
                         <Accordion styled={true} >
                             <div >
-                                <TaskView onClick={(task) => toDoStore.ChangeOpen(task)} task={task} />
+                                <TaskView onClickCheckbox={(task) => toDoStore.changeOpen(task)} task={task} onClickTask={(task) => toDoStore.changeSelectedTask(task)} />
                             </div>
                         </Accordion>
                     </div>

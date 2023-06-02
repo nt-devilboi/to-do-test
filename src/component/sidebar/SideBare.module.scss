@@ -1,0 +1,32 @@
+.exit {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  right: 150px ;
+  font-size: 19px;
+}
+
+.Segment {
+  color: #61dafb;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+
+  .checkBox {
+   margin-right: 6px
+  }
+
+  .input {
+    border: none;
+  }
+
+  .input:focus {
+    outline: none;
+  }
+}
+
+
+.desc {
+
+}
