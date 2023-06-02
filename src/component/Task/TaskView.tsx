@@ -8,16 +8,16 @@ import styles from "./Task.module.scss"
 @observer
 export class TaskView extends React.Component<{
     task: Task,
-    onClickCheckbox: (task: Task) => void,
+    onClickDropDown: (task: Task) => void,
     onClickTask: (task: Task) => void
+    onClickCheckBox: (task: Task) => void;
 }> {
     handleClick() {
 
     }
 
     render() {
-        const {task, onClickCheckbox: onClickDropDown, onClickTask} = this.props;
-        console.log("hello", task.subtasks)
+        const {task, onClickDropDown, onClickTask, onClickCheckBox} = this.props;
         return (
             <div>
                 <Accordion.Title className={styles.toDo}
@@ -30,7 +30,12 @@ export class TaskView extends React.Component<{
                         {task.title}
                     </button>
                     <div>
-                        <Checkbox className={styles.checkBox} onClick={(e) => e.stopPropagation()}/>
+                        <Checkbox className={styles.checkBox}
+                                  checked={task.isComplete}
+                                  onClick={(e) => {
+                            onClickCheckBox(task);
+                            e.stopPropagation()
+                        }}/>
                     </div>
                 </Accordion.Title>
                 <Accordion.Content active={task.isOpen}>
@@ -40,8 +45,9 @@ export class TaskView extends React.Component<{
                         task.subtasks.map(subTask =>
                             <div>
                                 <TaskView onClickTask={(task) => onClickTask(task)}
-                                          onClickCheckbox={(subTask) => onClickDropDown(subTask)}
-                                          task={subTask}/>
+                                          onClickDropDown={(subTask) => onClickDropDown(subTask)}
+                                          task={subTask}
+                                          onClickCheckBox={(subTask) => onClickCheckBox(subTask)}/>
                             </div>
                         )
                     }

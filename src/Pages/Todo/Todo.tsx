@@ -5,14 +5,16 @@ import {TodoStore} from "./TodoStore";
 import {Accordion, Sidebar} from "semantic-ui-react";
 import styles from "./Todo.module.scss"
 import {SideBar} from "../../component/sidebar/SideBar";
+
 export interface Task {
     id: number
     title: string;
     active: boolean;
     description: string;
     isOpen: boolean;
+    isComplete: boolean;
     subtasks: Task[];
-    }
+}
 
 
 type InjPros = {
@@ -39,19 +41,22 @@ export class Todo extends React.Component {
                      onClose={() => toDoStore.removeSelectedTask()}
                      onChangeTitle={(newTitle: string) => toDoStore.changeTitle(newTitle, toDoStore.SelectedTask!)}
                      onChangeDesc={(newDesc: string) => toDoStore.changeDesc(newDesc, toDoStore.SelectedTask!)}
-            onClickCheckBox={() => toDoStore}>
-            <div>
-                {toDoStore.Tasks.map(task =>
-                    <div className={styles.container} >
-                        <Accordion styled={true} >
-                            <div >
-                                <TaskView onClickCheckbox={(task) => toDoStore.changeOpen(task)} task={task} onClickTask={(task) => toDoStore.changeSelectedTask(task)} />
-                            </div>
-                        </Accordion>
-                    </div>
+                     onClickCheckBox={() => toDoStore.changeIsComplete(toDoStore.SelectedTask!)}>
+                <div>
+                    {toDoStore.Tasks.map(task =>
+                        <div className={styles.container}>
+                            <Accordion styled={true}>
+                                <div>
+                                    <TaskView onClickDropDown={(task) => toDoStore.changeOpen(task)}
+                                              task={task}
+                                              onClickTask={(task) => toDoStore.changeSelectedTask(task)}
+                                              onClickCheckBox={(task) => toDoStore.changeIsComplete(task)}/>
+                                </div>
+                            </Accordion>
+                        </div>
                     )}
 
-            </div>
+                </div>
             </SideBar>
 
         );

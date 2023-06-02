@@ -19,9 +19,10 @@ export class TodoStore {
     }
 
     @action
-    removeSelectedTask()  {
+    removeSelectedTask() {
         this.SelectedTask = undefined;
     }
+
     @action
     getTask() {
         console.log("я работаю")
@@ -29,13 +30,21 @@ export class TodoStore {
     }
 
     @action
+    changeIsComplete(task: Task) {
+        task.isComplete = !task.isComplete;
+    }
+
+
+    @action
     changeTitle(title: string, task: Task) {
         task.title = title;
     }
+
     @action
     changeDesc(desc: string, task: Task) {
         task.description = desc
     }
+
     @action
     changeOpen(task: Task): void {
         task.isOpen = !task.isOpen;

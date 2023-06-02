@@ -47,7 +47,10 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
 
                             <Segment className={styles.Segment}>
                                 <div style={{display: "flex", flexDirection: "row"   }}>
-                                    <Checkbox className={styles.checkBox} onClick={this.props.onClickCheckBox}/>
+                                    <Checkbox className={styles.checkBox}
+                                              checked={this.props.task?.isComplete}
+                                              onClick={() => this.props.onClickCheckBox()}/>
+
                                     <input className={styles.input} type={"text"} value={this.props.task?.title}
                                            onChange={(e) => this.props.onChangeTitle(e.target.value)}
                                     placeholder={"Напиши Задачу"}/>
@@ -70,7 +73,6 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
                                     <Header as='h3'>Todo</Header>
                                     {this.props.children}
                                 </div>
-
                             </Segment>
                         </Sidebar.Pusher>
                     </Sidebar.Pushable>
