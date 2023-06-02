@@ -30,17 +30,15 @@ export class TaskView extends React.Component<{
                         {task.title}
                     </button>
                     <div>
-                        <Checkbox className={styles.checkBox}
-                                  checked={task.isComplete}
+                        <Checkbox className={styles.checkBox} checked={task.isComplete}
                                   onClick={(e) => {
-                            onClickCheckBox(task);
-                            e.stopPropagation()
-                        }}/>
+                                      onClickCheckBox(task);
+                                      e.stopPropagation()
+                                  }}/>
                     </div>
                 </Accordion.Title>
                 <Accordion.Content active={task.isOpen}>
                     {
-
                         task.subtasks.length !== 0 &&
                         task.subtasks.map(subTask =>
                             <div>
