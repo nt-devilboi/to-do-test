@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import {Task} from "../../Pages/Todo/Todo";
 import styles from "./SideBare.module.scss"
 import {observer} from "mobx-react";
-import {InputTodo} from "../InputAddTask/inputTodo";
+import {InputToDo} from "../InputAddTask/inputToDo";
 
 type props = {
     task?: Task;
@@ -15,82 +15,75 @@ type props = {
     onClickDeleteTask: () => void;
     onClickAddSubtask: (title: string, task: Task) => void;
 }
+
 @observer
 export class SideBar extends React.Component<PropsWithChildren<props>> {
-    handleKeyPress(event: any) {
-        if (event.key === 'Enter') {
-            // Ваши действия при нажатии клавиши "Enter"
-            console.log('Нажата клавиша Enter');
-        }
-    }
-
     render() {
 
 
-
         return (
-            <div >
-            <Grid columns={1} >
-                <Grid.Column>
-                    <Sidebar.Pushable as={Segment}>
-                        <Sidebar
-                            as={Segment}
-                            animation='overlay'
-                            direction={"right"}
-                            icon='labeled'
-                            inverted
-                            onHide={() => console.log()}
-                            vertical
-                            visible={this.props.task !== undefined}
-                            width="wide"
-                        >
-                            <button className={styles.exit} onClick={() => this.props.onClose()}>
-                                <Icon color={"orange"} name={"arrow alternate circle right"}/>
-                            </button>
+            <div>
+                <Grid columns={1} style={{height: "100vh"}} >
+                    <Grid.Column >
+                        <Sidebar.Pushable as={Segment}>
+                            <Sidebar
+                                as={Segment}
+                                animation='overlay'
+                                direction={"right"}
+                                icon='labeled'
+                                inverted
+                                onHide={() => console.log()}
+                                vertical
+                                visible={this.props.task !== undefined}
+                                width="wide"
+                            >
+                                <button className={styles.exit} onClick={() => this.props.onClose()}>
+                                    <Icon color={"orange"} name={"arrow alternate circle right"}/>
+                                </button>
 
-                            <Segment className={styles.Segment}>
-                                <div style={{display: "flex", flexDirection: "row"   }}>
-                                    <Checkbox className={styles.checkBox}
-                                              checked={this.props.task?.isComplete}
-                                              onClick={() => this.props.onClickCheckBox()}/>
+                                <Segment className={styles.Segment}>
+                                    <div style={{display: "flex", flexDirection: "row"}}>
+                                        <Checkbox className={styles.checkBox}
+                                                  checked={this.props.task?.isComplete}
+                                                  onClick={() => this.props.onClickCheckBox()}/>
 
-                                    <input className={styles.input} type={"text"} value={this.props.task?.title}
-                                           onChange={(e) => this.props.onChangeTitle(e.target.value)}
-                                    placeholder={"Напиши Задачу"}/>
+                                        <input className={styles.input} type={"text"} value={this.props.task?.title}
+                                               onChange={(e) => this.props.onChangeTitle(e.target.value)}
+                                               placeholder={"Напиши Задачу"}/>
 
-                                </div>
-                            </Segment>
+                                    </div>
+                                </Segment>
 
-                            <Segment className={styles.Segment}>
-                                <div style={{display: "flex", flexDirection: "column"  }}>
-                                    <input className={styles.input} type={"text"} value={this.props.task?.description}
-                                    onChange={(e) => this.props.onChangeDesc(e.target.value)}
-                                    placeholder={"описание задачи"}/>
-                                </div>
-                            </Segment>
+                                <Segment className={styles.Segment}>
+                                    <div style={{display: "flex", flexDirection: "column", height: "100px"}}>
+                                        <input className={styles.input} type={"text"}
+                                               value={this.props.task?.description}
+                                               onChange={(e) => this.props.onChangeDesc(e.target.value)}
+                                               placeholder={"описание задачи"}/>
+                                    </div>
+                                </Segment>
 
 
+                                <InputToDo placeholder={"введи название подзадачи"}
+                                           width={"342px"}
+                                           onClick={(title: string) => this.props.onClickAddSubtask(title, this.props.task!)}/>
 
-                            <InputTodo placeholder={"введи название подзадачи"}
-                                       width={"342px"}
-                                       onClick={(title: string) => this.props.onClickAddSubtask(title, this.props.task!)}/>
+                                <button className={styles.trash} onClick={() => this.props.onClickDeleteTask()}>
+                                    <Icon size={"big"} color={"red"} name={"trash"}/>
+                                </button>
+                            </Sidebar>
 
-                            <button className={styles.trash} onClick={() => this.props.onClickDeleteTask()}>
-                                <Icon size={"big"} color={"red"} name={"trash"}/>
-                            </button>
-                        </Sidebar>
-
-                        <Sidebar.Pusher >
-                            <Segment size={"big"}  basic color={"purple"} >
-                                <div style={{height: "100vh"}}>
-                                    <Header as='h3'>Todo</Header>
-                                    {this.props.children}
-                                </div>
-                            </Segment>
-                        </Sidebar.Pusher>
-                    </Sidebar.Pushable>
-                </Grid.Column>
-            </Grid>
+                            <Sidebar.Pusher>
+                                <Segment size={"big"} basic color={"purple"}>
+                                    <div >
+                                        <Header as='h3'>Todo</Header>
+                                        {this.props.children}
+                                    </div>
+                                </Segment>
+                            </Sidebar.Pusher>
+                        </Sidebar.Pushable>
+                    </Grid.Column>
+                </Grid>
             </div>
         );
     }

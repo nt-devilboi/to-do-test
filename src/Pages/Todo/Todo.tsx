@@ -2,10 +2,10 @@ import React from "react";
 import {TaskView} from "../../component/Task/TaskView";
 import {inject, observer} from "mobx-react";
 import {TodoStore} from "./TodoStore";
-import {Accordion, Icon, Input, Sidebar} from "semantic-ui-react";
+import {Accordion, Button, Icon, Input, Sidebar} from "semantic-ui-react";
 import styles from "./Todo.module.scss"
 import {SideBar} from "../../component/sidebar/SideBar";
-import {InputTodo} from "../../component/InputAddTask/inputTodo";
+import {InputToDo} from "../../component/InputAddTask/inputToDo";
 
 export interface Task {
     id: number
@@ -27,7 +27,7 @@ type InjPros = {
 export class Todo extends React.Component {
 
     componentDidMount() {
-        this.injected.toDoStore.LoadTask();
+        this.injected.toDoStore.GetTask();
     }
 
     get injected(): InjPros {
@@ -46,7 +46,7 @@ export class Todo extends React.Component {
                      onClickDeleteTask={() => toDoStore.removeTask(toDoStore.SelectedTask!)}
                      onClickAddSubtask={(e, task) => toDoStore.addTask(e, task)}>
                 <div>
-                    <InputTodo placeholder={"Введи название задачи"}
+                    <InputToDo placeholder={"Введи название задачи"}
                                width={"602px"}
                                onClick={(title: string) => toDoStore.addTask(title) }/>
                     {toDoStore.TasksUp.map(task =>
@@ -61,6 +61,12 @@ export class Todo extends React.Component {
                             </Accordion>
                         </div>
                     )}
+
+                    <div>
+                        <Button onClick={() => toDoStore.SaveToLocalStorage()}>
+                            <span> сохранить </span>
+                        </Button>
+                    </div>
                 </div>
             </SideBar>
 

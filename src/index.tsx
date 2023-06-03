@@ -5,13 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "mobx-react";
 import {TodoStore} from "./Pages/Todo/TodoStore";
+import {LocalStorageTodos} from "./Service/LocalStorageTodos";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const storageTodos = new LocalStorageTodos();
 const stores = {
-    toDoStore: new TodoStore(),
+    toDoStore: new TodoStore(storageTodos),
 };
 root.render(
 

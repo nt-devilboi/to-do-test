@@ -46,6 +46,7 @@ export class TaskView extends React.Component<{
                                 <TaskView onClickTask={(task) => onClickTask(task)}
                                           onClickDropDown={(subTask) => onClickDropDown(subTask)}
                                           task={subTask}
+                                          key={subTask.id}
                                           onClickCheckBox={(subTask) => onClickCheckBox(subTask)}/>
                             </div>
                         )

@@ -1,6 +1,7 @@
-import {action, computed, makeObservable, observable} from "mobx";
+import {action, computed, makeObservable, observable, toJS} from "mobx";
 import {Task} from "./Todo";
 import {FakeApi} from "../../FakeApi/FakeApi";
+import {LocalStorageTodos} from "../../Service/LocalStorageTodos";
 
 export class TodoStore {
     @observable
@@ -8,8 +9,9 @@ export class TodoStore {
     @observable
     SelectedTask?: Task;
 
-    constructor() {
+    constructor(private localStoreTodo: LocalStorageTodos) {
         makeObservable(this)
+        this.localStoreTodo = localStoreTodo
     }
 
     @action
@@ -41,10 +43,19 @@ export class TodoStore {
     }
 
     @action
-    LoadTask() {
+    GetTask() {
+        let result = this.localStoreTodo.tryTake();
+        if (result.length !== 0) {
+            this.TasksUp = result;
+            return
+        }
+
         this.TasksUp = FakeApi.GetDataTodo();
     }
 
+    SaveToLocalStorage() {
+        this.localStoreTodo.save(this.TasksUp);
+    }
 
     @action
     changeIsComplete(task: Task) {

@@ -56,7 +56,7 @@ export class FakeApi {
                 id: 4,
                 active: false,
                 isComplete: false,
-                title: "Прокт",
+                title: "Проект",
                 description: "исправлять баги",
                 isOpen: false,
                 subtasks: []

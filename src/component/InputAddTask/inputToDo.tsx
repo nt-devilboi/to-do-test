@@ -11,7 +11,7 @@ type props = {
 type state = {
     title: string
 }
-export class InputTodo extends React.Component<props, state> {
+export class InputToDo extends React.Component<props, state> {
     constructor(props: props) {
         super(props);
         this.state = {
