@@ -22,7 +22,10 @@ export class TaskView extends React.Component<{
                                  index={task.id}
                                  onClick={() => onClickTask(task)}
                 >
-                    <button className={styles.switcher} onClick={() => onClickDropDown(task)}>
+                    <button className={styles.switcher} onClick={(e) => {
+                        e.stopPropagation();
+                        onClickDropDown(task)
+                    }}>
                         <Icon name='dropdown'/>
 
                     </button>
