@@ -45,30 +45,27 @@ export class Todo extends React.Component {
                      onClickCheckBox={() => toDoStore.changeIsComplete(toDoStore.SelectedTask!)}
                      onClickDeleteTask={() => toDoStore.removeTask(toDoStore.SelectedTask!)}
                      onClickAddSubtask={(e, task) => toDoStore.addTask(e, task)}>
-                <div>
-                    <InputToDo placeholder={"Введи название задачи"}
-                               width={"602px"}
-                               onClick={(title: string) => toDoStore.addTask(title) }/>
-                    {
-                        toDoStore.TasksUp.map(task =>
+
+                <InputToDo placeholder={"Введи название задачи"}
+                           width={"602px"}
+                           onClick={(title: string) => toDoStore.addTask(title)}/>
+                {
+                    toDoStore.TasksUp.map(task =>
                         <div className={styles.container}>
                             <Accordion styled={true}>
-                                <div>
-                                    <TaskView key={task.id} onClickDropDown={(task) => toDoStore.changeOpen(task)}
-                                              task={task}
-                                              onClickTask={(task) => toDoStore.changeSelectedTask(task)}
-                                              onClickCheckBox={(task) => toDoStore.changeIsComplete(task)}/>
-                                </div>
+                                <TaskView key={task.id} onClickDropDown={(task) => toDoStore.changeOpen(task)}
+                                          task={task}
+                                          onClickTask={(task) => toDoStore.changeSelectedTask(task)}
+                                          onClickCheckBox={(task) => toDoStore.changeIsComplete(task)}/>
                             </Accordion>
                         </div>
                     )}
 
-                    <div>
-                        <Button onClick={() => toDoStore.SaveToLocalStorage()}>
-                            <span> сохранить </span>
-                        </Button>
-                    </div>
-                </div>
+
+                <Button onClick={() => toDoStore.SaveToLocalStorage()}>
+                    <span> сохранить </span>
+                </Button>
+
             </SideBar>
 
         );

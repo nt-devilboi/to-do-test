@@ -5,8 +5,8 @@ import {Task} from "../../Pages/Todo/Todo";
 import styles from "./SideBare.module.scss"
 import {observer} from "mobx-react";
 import {InputToDo} from "../InputAddTask/inputToDo";
-import { TitleTask } from "../TitleTask/TitleTask";
-import { DescTask } from "../DescTask/DescTask";
+import {TitleTask} from "../TitleTask/TitleTask";
+import {DescTask} from "../DescTask/DescTask";
 
 type props = {
     task?: Task;
@@ -17,8 +17,6 @@ type props = {
     onClickDeleteTask: () => void;
     onClickAddSubtask: (title: string, task: Task) => void;
 }
-
-
 
 
 @observer

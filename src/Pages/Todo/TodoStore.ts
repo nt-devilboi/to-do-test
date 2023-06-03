@@ -1,4 +1,4 @@
-import {action, computed, makeObservable, observable, toJS} from "mobx";
+import {action, makeObservable, observable} from "mobx";
 import {Task} from "./Todo";
 import {FakeApi} from "../../FakeApi/FakeApi";
 import {LocalStorageTodos} from "../../Service/LocalStorageTodos";
@@ -84,7 +84,6 @@ export class TodoStore {
 
         for (let task of curTasks) {
             if (task.subtasks.length !== 0) {
-                console.log("asfas", task)
                 this.dfsFindTask(curTask, task.subtasks)
             }
         }
@@ -100,5 +99,3 @@ export class TodoStore {
         task.isOpen = !task.isOpen;
     }
 }
-
-// todo реализовать счётчик выполенных задач сomputedte

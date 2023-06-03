@@ -12,9 +12,6 @@ export class TaskView extends React.Component<{
     onClickTask: (task: Task) => void
     onClickCheckBox: (task: Task) => void;
 }> {
-    handleClick() {
-
-    }
 
     render() {
         const {task, onClickDropDown, onClickTask, onClickCheckBox} = this.props;
@@ -30,13 +27,11 @@ export class TaskView extends React.Component<{
 
                     </button>
                     {task.title}
-                    <div>
-                        <Checkbox className={styles.checkBox} checked={task.isComplete}
-                                  onClick={(e) => {
-                                      onClickCheckBox(task);
-                                      e.stopPropagation()
-                                  }}/>
-                    </div>
+                    <Checkbox className={styles.checkBox} checked={task.isComplete}
+                              onClick={(e) => {
+                                  onClickCheckBox(task);
+                                  e.stopPropagation()
+                              }}/>
                 </Accordion.Title>
                 <Accordion.Content active={task.isOpen}>
                     {

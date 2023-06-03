@@ -8,7 +8,7 @@ import {TodoStore} from "./Pages/Todo/TodoStore";
 import {LocalStorageTodos} from "./Service/LocalStorageTodos";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 
 const storageTodos = new LocalStorageTodos();
@@ -16,11 +16,9 @@ const stores = {
     toDoStore: new TodoStore(storageTodos),
 };
 root.render(
-
-      <Provider {...stores}>
-    <App />
-      </Provider>
-
+    <Provider {...stores}>
+        <App/>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

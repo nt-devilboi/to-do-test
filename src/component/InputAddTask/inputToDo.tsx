@@ -11,6 +11,7 @@ type props = {
 type state = {
     title: string
 }
+
 export class InputToDo extends React.Component<props, state> {
     constructor(props: props) {
         super(props);
@@ -18,6 +19,7 @@ export class InputToDo extends React.Component<props, state> {
             title: ""
         }
     }
+
     render() {
         const {onClick, width, placeholder} = this.props;
         return (

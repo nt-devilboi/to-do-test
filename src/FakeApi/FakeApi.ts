@@ -51,7 +51,8 @@ export class FakeApi {
                 title: "Typesctript",
                 description: "изучать mobx",
                 isOpen: false,
-                subtasks: []}, // дописать
+                subtasks: []
+            }, // дописать
             {
                 id: 4,
                 active: false,
