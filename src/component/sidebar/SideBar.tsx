@@ -1,10 +1,12 @@
 import React, {PropsWithChildren} from "react";
-import {Checkbox, Grid, Header, Icon, Segment, Sidebar} from "semantic-ui-react";
+import {Grid, Header, Icon, Segment, Sidebar} from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css'
 import {Task} from "../../Pages/Todo/Todo";
 import styles from "./SideBare.module.scss"
 import {observer} from "mobx-react";
 import {InputToDo} from "../InputAddTask/inputToDo";
+import { TitleTask } from "../TitleTask/TitleTask";
+import { DescTask } from "../DescTask/DescTask";
 
 type props = {
     task?: Task;
@@ -16,6 +18,9 @@ type props = {
     onClickAddSubtask: (title: string, task: Task) => void;
 }
 
+
+
+
 @observer
 export class SideBar extends React.Component<PropsWithChildren<props>> {
     render() {
@@ -23,8 +28,8 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
 
         return (
             <div>
-                <Grid columns={1} style={{height: "100vh"}} >
-                    <Grid.Column >
+                <Grid columns={1} style={{height: "100vh"}}>
+                    <Grid.Column>
                         <Sidebar.Pushable as={Segment}>
                             <Sidebar
                                 as={Segment}
@@ -41,27 +46,11 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
                                     <Icon color={"orange"} name={"arrow alternate circle right"}/>
                                 </button>
 
-                                <Segment className={styles.Segment}>
-                                    <div style={{display: "flex", flexDirection: "row"}}>
-                                        <Checkbox className={styles.checkBox}
-                                                  checked={this.props.task?.isComplete}
-                                                  onClick={() => this.props.onClickCheckBox()}/>
+                                <TitleTask task={this.props.task!} onClick={() => this.props.onClickCheckBox()}
+                                           onChange={(e) => this.props.onChangeTitle(e)}/>
 
-                                        <input className={styles.input} type={"text"} value={this.props.task?.title}
-                                               onChange={(e) => this.props.onChangeTitle(e.target.value)}
-                                               placeholder={"Напиши Задачу"}/>
-
-                                    </div>
-                                </Segment>
-
-                                <Segment className={styles.Segment}>
-                                    <div style={{display: "flex", flexDirection: "column", height: "100px"}}>
-                                        <input className={styles.input} type={"text"}
-                                               value={this.props.task?.description}
-                                               onChange={(e) => this.props.onChangeDesc(e.target.value)}
-                                               placeholder={"описание задачи"}/>
-                                    </div>
-                                </Segment>
+                                <DescTask task={this.props.task!}
+                                          onChange={(e) => this.props.onChangeDesc(e)}/>
 
 
                                 <InputToDo placeholder={"введи название подзадачи"}
@@ -75,7 +64,7 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
 
                             <Sidebar.Pusher>
                                 <Segment size={"big"} basic color={"purple"}>
-                                    <div >
+                                    <div>
                                         <Header as='h3'>Todo</Header>
                                         {this.props.children}
                                     </div>

@@ -2,7 +2,7 @@ import React from "react";
 import {TaskView} from "../../component/Task/TaskView";
 import {inject, observer} from "mobx-react";
 import {TodoStore} from "./TodoStore";
-import {Accordion, Button, Icon, Input, Sidebar} from "semantic-ui-react";
+import {Accordion, Button} from "semantic-ui-react";
 import styles from "./Todo.module.scss"
 import {SideBar} from "../../component/sidebar/SideBar";
 import {InputToDo} from "../../component/InputAddTask/inputToDo";
@@ -49,7 +49,8 @@ export class Todo extends React.Component {
                     <InputToDo placeholder={"Введи название задачи"}
                                width={"602px"}
                                onClick={(title: string) => toDoStore.addTask(title) }/>
-                    {toDoStore.TasksUp.map(task =>
+                    {
+                        toDoStore.TasksUp.map(task =>
                         <div className={styles.container}>
                             <Accordion styled={true}>
                                 <div>
@@ -73,4 +74,3 @@ export class Todo extends React.Component {
         );
     }
 }
-// todo вынести в компонент todoStore.map ......
