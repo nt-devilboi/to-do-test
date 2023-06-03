@@ -46,13 +46,12 @@ export class Todo extends React.Component {
                      onClickDeleteTask={() => toDoStore.removeTask(toDoStore.SelectedTask!)}
                      onClickAddSubtask={(e, task) => toDoStore.addTask(e, task)}>
 
-                <InputToDo placeholder={"Введи название задачи"}
-                           width={"602px"}
+                <InputToDo placeholder={"Введи название задачи"} width={"602px"}
                            onClick={(title: string) => toDoStore.addTask(title)}/>
                 {
                     toDoStore.TasksUp.map(task =>
                         <div className={styles.container}>
-                            <Accordion styled={true}>
+                            <Accordion as={styles.Accordion} styled={true} className={styles.Accordion} >
                                 <TaskView key={task.id} onClickDropDown={(task) => toDoStore.changeOpen(task)}
                                           task={task}
                                           onClickTask={(task) => toDoStore.changeSelectedTask(task)}

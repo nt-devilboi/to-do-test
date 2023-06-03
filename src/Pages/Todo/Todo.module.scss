@@ -6,9 +6,12 @@
   align-items: center;
   height: 330%;
 
-  .Accordion {
-    display: flex;
-    justify-content: flex-start;
+  .Accordion:hover {
+    background: #f0f0f0 !important;
+  }
+
+  .Accordion:active {
+    background: #f0f0f0 !important;
   }
 }
 
