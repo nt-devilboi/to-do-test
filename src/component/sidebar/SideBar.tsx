@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import {Task} from "../../Pages/Todo/Todo";
 import styles from "./SideBare.module.scss"
 import {observer} from "mobx-react";
+import {InputTodo} from "../InputAddTask/inputTodo";
 
 type props = {
     task?: Task;
@@ -11,7 +12,8 @@ type props = {
     onChangeTitle: (newTitle: string) => void;
     onChangeDesc: (newDesc: string) => void;
     onClickCheckBox: () => void;
-    onClickTrash: () => void;
+    onClickDeleteTask: () => void;
+    onClickAddSubtask: (title: string, task: Task) => void;
 }
 @observer
 export class SideBar extends React.Component<PropsWithChildren<props>> {
@@ -67,11 +69,13 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
                                 </div>
                             </Segment>
 
-                            <Segment>
 
 
-                            </Segment>
-                            <button className={styles.trash} onClick={() => this.props.onClickTrash()}>
+                            <InputTodo placeholder={"введи название подзадачи"}
+                                       width={"342px"}
+                                       onClick={(title: string) => this.props.onClickAddSubtask(title, this.props.task!)}/>
+
+                            <button className={styles.trash} onClick={() => this.props.onClickDeleteTask()}>
                                 <Icon size={"big"} color={"red"} name={"trash"}/>
                             </button>
                         </Sidebar>

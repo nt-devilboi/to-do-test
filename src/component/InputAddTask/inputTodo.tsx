@@ -4,12 +4,14 @@ import styles from "./inputAddTask.module.scss"
 
 type props = {
     onClick: (title: string) => void;
+    width: string;
+    placeholder: string;
 }
 
 type state = {
     title: string
 }
-export class InputAddTask extends React.Component<props, state> {
+export class InputTodo extends React.Component<props, state> {
     constructor(props: props) {
         super(props);
         this.state = {
@@ -17,10 +19,14 @@ export class InputAddTask extends React.Component<props, state> {
         }
     }
     render() {
-        const {onClick} = this.props;
+        const {onClick, width, placeholder} = this.props;
         return (
             <div style={{marginBottom: "30px", width: "auto"}} className="ui input">
-                <input onChange={(e) => this.setState({title: e.target.value})} className={styles.input} type="text"  placeholder="Введи название задачи"/>
+                <input onChange={(e) => this.setState({title: e.target.value})}
+                       style={{width: width}}
+                       className={styles.input}
+                       type="text"
+                       placeholder={placeholder}/>
                 <button className={styles.addTask} onClick={() => onClick(this.state.title)}>
                     <Icon name={"plus"}/>
                 </button>

@@ -18,7 +18,7 @@ export class TodoStore {
     }
 
     @action
-    addTask(title: string) {
+    addTask(title: string, task?: Task) {
         const newTask: Task = {
             id: Math.floor((Math.random() * 1000000) + 1),
             isComplete: false,
@@ -29,7 +29,10 @@ export class TodoStore {
             active: false
         }
 
-        this.TasksUp.push(newTask);
+        if (task === undefined)
+            this.TasksUp.push(newTask);
+        else
+            task.subtasks.push(newTask);
     }
 
     @action
@@ -86,4 +89,5 @@ export class TodoStore {
         task.isOpen = !task.isOpen;
     }
 }
+
 // todo реализовать счётчик выполенных задач сomputedte

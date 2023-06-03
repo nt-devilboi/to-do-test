@@ -5,7 +5,7 @@ import {TodoStore} from "./TodoStore";
 import {Accordion, Icon, Input, Sidebar} from "semantic-ui-react";
 import styles from "./Todo.module.scss"
 import {SideBar} from "../../component/sidebar/SideBar";
-import {InputAddTask} from "../../component/InputAddTask/inputAddTask";
+import {InputTodo} from "../../component/InputAddTask/inputTodo";
 
 export interface Task {
     id: number
@@ -43,9 +43,12 @@ export class Todo extends React.Component {
                      onChangeTitle={(newTitle: string) => toDoStore.changeTitle(newTitle, toDoStore.SelectedTask!)}
                      onChangeDesc={(newDesc: string) => toDoStore.changeDesc(newDesc, toDoStore.SelectedTask!)}
                      onClickCheckBox={() => toDoStore.changeIsComplete(toDoStore.SelectedTask!)}
-                     onClickTrash={() => toDoStore.removeTask(toDoStore.SelectedTask!)}>
+                     onClickDeleteTask={() => toDoStore.removeTask(toDoStore.SelectedTask!)}
+                     onClickAddSubtask={(e, task) => toDoStore.addTask(e, task)}>
                 <div>
-                    <InputAddTask onClick={(title: string) => toDoStore.addTask(title) }/>
+                    <InputTodo placeholder={"Введи название задачи"}
+                               width={"602px"}
+                               onClick={(title: string) => toDoStore.addTask(title) }/>
                     {toDoStore.TasksUp.map(task =>
                         <div className={styles.container}>
                             <Accordion styled={true}>
