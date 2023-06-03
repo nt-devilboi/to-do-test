@@ -46,7 +46,7 @@ export class Todo extends React.Component {
                      onClickTrash={() => toDoStore.removeTask(toDoStore.SelectedTask!)}>
                 <div>
                     <InputAddTask onClick={(title: string) => toDoStore.addTask(title) }/>
-                    {toDoStore.Tasks.map(task =>
+                    {toDoStore.TasksUp.map(task =>
                         <div className={styles.container}>
                             <Accordion styled={true}>
                                 <div>

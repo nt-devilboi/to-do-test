@@ -4,7 +4,7 @@ import {FakeApi} from "../../FakeApi/FakeApi";
 
 export class TodoStore {
     @observable
-    Tasks: Task[] = [];
+    TasksUp: Task[] = [];
     @observable
     SelectedTask?: Task;
 
@@ -20,7 +20,7 @@ export class TodoStore {
     @action
     addTask(title: string) {
         const newTask: Task = {
-            id: Math.floor((Math.random() * 100000) + 1),
+            id: Math.floor((Math.random() * 1000000) + 1),
             isComplete: false,
             title: title,
             description: '',
@@ -29,7 +29,7 @@ export class TodoStore {
             active: false
         }
 
-        this.Tasks.push(newTask);
+        this.TasksUp.push(newTask);
     }
 
     @action
@@ -39,8 +39,9 @@ export class TodoStore {
 
     @action
     LoadTask() {
-        this.Tasks = FakeApi.GetDataTodo();
+        this.TasksUp = FakeApi.GetDataTodo();
     }
+
 
     @action
     changeIsComplete(task: Task) {
@@ -55,11 +56,23 @@ export class TodoStore {
 
     @action
     removeTask(task: Task) {
+        this.dfsFindTask(task, this.TasksUp)
+    }
 
-        const index = this.Tasks.indexOf(task, 0);
+    private dfsFindTask(curTask: Task, prevTask: Task[]) {
+        const curTasks = prevTask;
+        const index = curTasks.indexOf(curTask, 0);
         if (index > -1) {
-            this.Tasks.splice(index, 1);
-            this.SelectedTask = undefined;
+            curTasks.splice(index, 1);
+            this.removeSelectedTask();
+            return;
+        }
+
+        for (let task of curTasks) {
+            if (task.subtasks.length !== 0) {
+                console.log("asfas", task)
+                this.dfsFindTask(curTask, task.subtasks)
+            }
         }
     }
 
