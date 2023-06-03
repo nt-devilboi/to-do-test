@@ -55,7 +55,7 @@ export class SideBar extends React.Component<PropsWithChildren<props>> {
                                            onClick={(title: string) => this.props.onClickAddSubtask(title, this.props.task!)}/>
 
                                 <button className={styles.trash} onClick={() => this.props.onClickDeleteTask()}>
-                                    <Icon size={"big"} color={"red"} name={"trash"}/>
+                                    <Icon size={"big"} color={"orange"} name={"trash"}/>
                                 </button>
                             </Sidebar>
 
