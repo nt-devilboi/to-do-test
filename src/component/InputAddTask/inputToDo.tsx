@@ -1,6 +1,7 @@
 import React from "react";
 import {Icon} from "semantic-ui-react";
 import styles from "./inputAddTask.module.scss"
+import {observer} from "mobx-react";
 
 type props = {
     onClick: (title: string) => void;
@@ -28,8 +29,12 @@ export class InputToDo extends React.Component<props, state> {
                        style={{width: width}}
                        className={styles.input}
                        type="text"
+                       value={this.state.title}
                        placeholder={placeholder}/>
-                <button className={styles.addTask} onClick={() => onClick(this.state.title)}>
+                <button className={styles.addTask} onClick={() => {
+                    onClick(this.state.title);
+                    this.setState({title: ""});
+                }}>
                     <Icon name={"plus"}/>
                 </button>
             </div>

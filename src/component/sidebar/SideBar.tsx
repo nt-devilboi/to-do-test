@@ -23,7 +23,6 @@ type props = {
 export class SideBar extends React.Component<PropsWithChildren<props>> {
     render() {
 
-
         return (
             <div>
                 <Grid columns={1} style={{height: "100vh"}}>
