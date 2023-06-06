@@ -51,7 +51,7 @@ export class Todo extends React.Component {
                 {
                     toDoStore.TasksUp.map(task =>
                         <div className={styles.container}>
-                            <Accordion as={styles.Accordion} styled={true} className={styles.Accordion} >
+                            <Accordion styled className={`${task.isComplete ? styles.isComplete : styles.Accordion}` } >
                                 <TaskView key={task.id} onClickDropDown={(task) => toDoStore.changeOpen(task)}
                                           task={task}
                                           onClickTask={(task) => toDoStore.changeSelectedTask(task)}

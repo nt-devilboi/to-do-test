@@ -3,11 +3,7 @@
   justify-content: flex-start;
   padding: 0;
   transition: background-color 0.3s ease;
-  .checkBox {
-    position: fixed;
-    left: 64%;
 
-  }
 
   .checkBox:hover {
   }
@@ -17,7 +13,8 @@
     border: none;
     background: none;
     cursor: pointer;
-
+    position: relative;
+    top: 10px;
   }
 
   .Segment {
@@ -26,3 +23,12 @@
   }
 }
 
+.checkBox {
+  display: none;
+  position: fixed;
+  left: 271px;
+  bottom: 24px;
+
+
+
+}

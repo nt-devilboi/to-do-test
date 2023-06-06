@@ -1,10 +1,11 @@
+$isComplete: "green";
+
 .container {
   display: flex;
   flex-direction: column;
   margin-bottom: 8px;
   justify-content: center;
   align-items: center;
-  height: 330%;
 
   .Accordion:hover {
     background: #f0f0f0 !important;
@@ -12,6 +13,10 @@
 
   .Accordion:active {
     background: #f0f0f0 !important;
+  }
+
+  .isComplete {
+    background: #3BB08F !important;
   }
 }
 

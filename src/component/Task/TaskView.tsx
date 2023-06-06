@@ -16,31 +16,36 @@ export class TaskView extends React.Component<{
     render() {
         const {task, onClickDropDown, onClickTask, onClickCheckBox} = this.props;
         return (
-            <div style={{color: "green"}}>
+            <div>
                 <Accordion.Title className={styles.toDo}
                                  active={task.isOpen}
                                  index={task.id}
                                  onClick={() => onClickTask(task)}
                 >
+
                     <button className={styles.switcher} onClick={(e) => {
                         e.stopPropagation();
                         onClickDropDown(task)
                     }}>
                         <Icon name='dropdown'/>
-
                     </button>
-                    {task.title}
-                    <Checkbox className={styles.checkBox} checked={task.isComplete}
-                              onClick={(e) => {
-                                  onClickCheckBox(task);
-                                  e.stopPropagation()
-                              }}/>
+
+                    <div>
+                        <span style={{float: "left", position: "relative", top: "10px"}}>{task.title}</span>
+                    </div>
+
+
+
                 </Accordion.Title>
-                <Accordion.Content active={task.isOpen}>
+                <Checkbox className={styles.checkBox} checked={task.isComplete}
+                          onClick={(e) => {
+                              onClickCheckBox(task);
+                              e.stopPropagation()
+                          }}/>
+                <Accordion.Content active={task.isOpen && task.subtasks.length !== 0}>
                     {
-                        task.subtasks.length !== 0 &&
                         task.subtasks.map(subTask =>
-                            <div>
+                            <div >
                                 <TaskView onClickTask={(task) => onClickTask(task)}
                                           onClickDropDown={(subTask) => onClickDropDown(subTask)}
                                           task={subTask}
