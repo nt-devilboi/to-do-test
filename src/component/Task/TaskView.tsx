@@ -11,18 +11,18 @@ export class TaskView extends React.Component<{
     onClickDropDown: (task: Task) => void,
     onClickTask: (task: Task) => void
     onClickCheckBox: (task: Task) => void;
+    onClickActive: (task: Task) => void;
 }> {
 
     render() {
-        const {task, onClickDropDown, onClickTask, onClickCheckBox} = this.props;
+        const {task, onClickDropDown, onClickTask, onClickCheckBox, onClickActive} = this.props;
         return (
-            <div>
+            <div style={{background: this.props.task.active ? "#3BB08F" : "white"}}>
                 <Accordion.Title className={styles.toDo}
                                  active={task.isOpen}
                                  index={task.id}
                                  onClick={() => onClickTask(task)}
                 >
-
                     <button className={styles.switcher} onClick={(e) => {
                         e.stopPropagation();
                         onClickDropDown(task)
@@ -31,26 +31,29 @@ export class TaskView extends React.Component<{
                     </button>
 
                     <div>
-                        <span style={{float: "left", position: "relative", top: "10px"}}>{task.title}</span>
+                        <span>{task.title}</span>
                     </div>
 
+                    <input type={"checkbox"} className={styles.checkBox} checked={task.isComplete}
+                           onClick={(e) => {
+                               onClickCheckBox(task);
+                               onClickActive(task);
+                               e.stopPropagation()
+                           }}/>
 
 
                 </Accordion.Title>
-                <Checkbox className={styles.checkBox} checked={task.isComplete}
-                          onClick={(e) => {
-                              onClickCheckBox(task);
-                              e.stopPropagation()
-                          }}/>
-                <Accordion.Content active={task.isOpen && task.subtasks.length !== 0}>
+
+                <Accordion.Content className={styles.content} active={task.isOpen && task.subtasks.length !== 0}>
                     {
                         task.subtasks.map(subTask =>
-                            <div >
+                            <div>
                                 <TaskView onClickTask={(task) => onClickTask(task)}
                                           onClickDropDown={(subTask) => onClickDropDown(subTask)}
                                           task={subTask}
                                           key={subTask.id}
-                                          onClickCheckBox={(subTask) => onClickCheckBox(subTask)}/>
+                                          onClickCheckBox={(subTask) => onClickCheckBox(subTask)}
+                                          onClickActive={(subTask) => this.props.onClickActive(subTask)}/>
                             </div>
                         )
                     }

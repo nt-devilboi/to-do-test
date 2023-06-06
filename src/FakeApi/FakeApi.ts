@@ -8,7 +8,7 @@ export class FakeApi {
                 id: 1,
                 title: "C#",
                 active: false,
-                isComplete: true,
+                isComplete: false,
                 description: "изучать алгосы!!",
                 isOpen: false,
                 subtasks: [
@@ -45,7 +45,7 @@ export class FakeApi {
                 ]
             },
             {
-                id: 3,
+                id: 7,
                 active: false,
                 isComplete: false,
                 title: "Typesctript",
@@ -54,7 +54,7 @@ export class FakeApi {
                 subtasks: []
             }, // дописать
             {
-                id: 4,
+                id: 10,
                 active: false,
                 isComplete: false,
                 title: "Проект",

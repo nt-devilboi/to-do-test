@@ -43,6 +43,46 @@ export class TodoStore {
     }
 
     @action
+    changeActive(task: Task): void {
+        task.active = !task.active;
+        if (task.active)
+            this.inActive(task.subtasks, task.active)
+        else
+            this.inNonActive(task, this.TasksUp)
+    }
+
+    private inNonActive(findTask: Task, prevTask: Task[]): boolean {
+        const curTasks = prevTask;
+        const task = curTasks.find(x => x.id === findTask.id);
+        if (task !== undefined) {
+            task.active = false;
+            return true;
+        }
+
+        for (let task of curTasks) {
+            if (task.subtasks.length !== 0) {
+                const isFound = this.inNonActive(findTask, task.subtasks)
+                if (isFound) {
+                    task.active = false
+                    return isFound;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private inActive(FindTask: Task[], active: boolean) {
+        for (let task of FindTask) {
+
+            task.active = active;
+            if (task.subtasks.length !== 0) {
+                this.inActive(task.subtasks, active);
+            }
+        }
+    }
+
+    @action
     GetTask() {
         let result = this.localStoreTodo.tryTake();
         if (result.length !== 0) {
@@ -73,9 +113,9 @@ export class TodoStore {
         this.dfsFindTask(task, this.TasksUp)
     }
 
-    private dfsFindTask(curTask: Task, prevTask: Task[]) {
+    private dfsFindTask(findTask: Task, prevTask: Task[]) {
         const curTasks = prevTask;
-        const index = curTasks.indexOf(curTask, 0);
+        const index = curTasks.indexOf(findTask, 0);
         if (index > -1) {
             curTasks.splice(index, 1);
             this.removeSelectedTask();
@@ -84,7 +124,7 @@ export class TodoStore {
 
         for (let task of curTasks) {
             if (task.subtasks.length !== 0) {
-                this.dfsFindTask(curTask, task.subtasks)
+                this.dfsFindTask(findTask, task.subtasks)
             }
         }
     }

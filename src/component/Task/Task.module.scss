@@ -1,10 +1,9 @@
 .toDo {
   display: flex;
-  justify-content: flex-start;
-  padding: 0;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-left: 0px !important;
   transition: background-color 0.3s ease;
-
-
   .checkBox:hover {
   }
 
@@ -13,8 +12,6 @@
     border: none;
     background: none;
     cursor: pointer;
-    position: relative;
-    top: 10px;
   }
 
   .Segment {
@@ -23,12 +20,13 @@
   }
 }
 
-.checkBox {
-  display: none;
-  position: fixed;
-  left: 271px;
-  bottom: 24px;
+.content {
+  padding-left: 8px !important;
+  padding-right: 0px !important;
+}
 
+.checkBox {
+  float: right;
 
 
 }
