@@ -44,7 +44,7 @@ export class TaskView extends React.Component<{
 
                 </Accordion.Title>
 
-                <Accordion.Content className={styles.content} active={task.isOpen && task.subtasks.length !== 0}>
+                <Accordion.Content className={`${styles.content} ${this.props.task.active ? styles.contentColor : ''}` } active={task.isOpen && task.subtasks.length !== 0}>
                     {
                         task.subtasks.map(subTask =>
                             <div>

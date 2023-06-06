@@ -21,8 +21,14 @@
 }
 
 .content {
-  padding-left: 8px !important;
+  padding-left: 0px !important;
   padding-right: 0px !important;
+  border-left: 5px solid white  ;
+}
+.contentColor {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  border-left: 5px solid #3BB08F;
 }
 
 .checkBox {
